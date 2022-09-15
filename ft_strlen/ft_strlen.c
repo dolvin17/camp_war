@@ -6,7 +6,7 @@
 /*   By: ghuertas <ghuertas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 12:20:14 by ghuertas          #+#    #+#             */
-/*   Updated: 2022/09/15 12:23:08 by ghuertas         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:24:10 by ghuertas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_strlen(char *str)
 	}
 	return (i);
 }
+
 /*
 #include <stdio.h>
 
