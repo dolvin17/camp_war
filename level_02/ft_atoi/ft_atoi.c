@@ -6,7 +6,7 @@
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 23:31:26 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/09/17 23:58:20 by dolvin17         ###   ########.fr       */
+/*   Updated: 2022/09/18 00:09:28 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,13 @@ int	ft_atoi(const char *str);*/
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
-}
 int	ft_atoi(const char *str)
 {
 	unsigned long int	number;
 	int					sign;
 	int					i;
 
+	i = 0;
 	number = 0;
 	sign = 1;
 	while (str[i] == 32 || str[i] >= 9 && str[i] <= 13)
@@ -41,18 +38,15 @@ int	ft_atoi(const char *str)
 		sign = sign * -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while (ft_isdigit(str[i]))
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		number = number * 10 + (str[i] - '0');
-		if (number > 9223372036854775808UL && sign == -1)
-			return (0);
-		if (number > 9223372036854775807UL && sign == 1)
-			return (-1);
 		i++;
 	}
 	return (number * sign);
 }
 
+/*
 int	main(void)
 {
 	const char	test1[] = "		4693"; //tiene whitespaces al inicio
@@ -83,4 +77,4 @@ int	main(void)
 	printf("Original: %i\n", atoi(test9));
 	printf("Mine: %i\n", ft_atoi(test9));
 	return (0);
-}
+}*/
