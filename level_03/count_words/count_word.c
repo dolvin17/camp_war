@@ -6,7 +6,7 @@
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:19:28 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/10/06 15:16:02 by dolvin17         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:26:03 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	count_words(char *str, char c)
 	n_words = 0;
 	while (str[i])
 	{
-		while (str[i] == c && str[i] != '\0')
+		while (str[i] && str[i] == c)
 			i++;
 			n_words++;
 		while (str[i] && str[i] != c)

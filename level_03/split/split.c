@@ -6,7 +6,7 @@
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:21:08 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/10/06 14:17:10 by dolvin17         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:23:44 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,20 @@ char    **ft_split(char *str);*/
 
 int	ft_count_words(char *str, char c)
 {
-	
+	int	n_words;
+	int	i;
+
+	i = 0;
+	n_words = 0;
+	while (str[i])
+	{
+		while (str[i] && str[i] == c && str[i] != '\0')
+			i++;
+			n_words++;
+		while (str[i] && str[i] != c)
+			i++;
+	}
+	return (n_words);
 }
 char	**ft_split(char *str)
 {
