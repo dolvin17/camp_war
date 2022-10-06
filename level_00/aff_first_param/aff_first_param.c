@@ -6,7 +6,7 @@
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:38:54 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/09/16 19:57:52 by dolvin17         ###   ########.fr       */
+/*   Updated: 2022/10/06 23:49:30 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ int	main(int argc, char **argv)
 	if (argc > 1)
 	{
 		while (argv[1][i])
-		{
-			write(1, &argv[1][i], 1);
-			i++;
-		}
+			write(1, &argv[1][i++], 1);
 		write(1, "\n", 1);
-		return (0);
 	}
 	else
 		write(1, "\n", 1);
+	return (0);
 }
