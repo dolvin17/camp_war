@@ -1,28 +1,38 @@
 #include <unistd.h>
 
-void	ft_write_number(int number)
+void	print_number(int n)
 {
-	if (number > 9)
-		ft_write_number(number / 10);
-	write(1, &"0123456789"[number % 10], 1);
+	if (n > 9)
+	{
+		write(1, &"0123456789"[n / 10], 1);
+		write(1, &"0123456789"[n % 10],  1);
+	}
+	else
+		write(1, &"0123456789"[n], 1);
+
 }
+
 
 int	main(void)
 {
-	int	number;
+	int	n;
 
-	number = 1;
-	while (number <= 100)
+	n = 1;
+	while (n < 100)
 	{
-		if (number % 3 == 0 && number % 5 == 0)
+		if (n % 3 == 0 && n % 5 == 0)
 			write(1, "fizzbuzz", 8);
-		else if (number % 3 == 0)
+		else if (n % 3 == 0)
 			write(1, "fizz", 4);
-		else if (number % 5 == 0)
+		else if (n % 5 == 0)
 			write(1, "buzz", 4);
 		else
-			ft_write_number(number);
+			print_number(n);
 		write(1, "\n", 1);
-		number++;
+		n++;
+		if (n == 100)
+			write(1, "buzz\n", 5);
 	}
+
+	return (0);
 }
