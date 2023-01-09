@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 22:18:45 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/09/17 13:28:02 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/09 06:40:51 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/09 06:49:53 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,43 +29,23 @@ $>./ulstr | cat -e
 $*/
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-char	find_upper_or_low_case(char *str)
+int	main(int argc, char **argv)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			ft_putchar(str[i] + 32);
-		}
-		else if (str[i] >= 'a' && str[i] <= 'z')
-		{
-			ft_putchar(str[i] - 32);
-		}
-		else
-		{
-			ft_putchar(str[i]);
-		}
-		i++;
-	}
-	ft_putchar('\n');
-	return (*str);
-}
-
-int	main(int argc, char **argv)
-{
 	if (argc == 2)
 	{
-		find_upper_or_low_case(argv[1]);
+		while (argv[1][i])
+		{
+			if (argv[1][i] >= 'a' && argv[1][i] <= 'z')
+				argv[1][i] -= 32;
+			else if (argv[1][i] >= 'A' && argv[1][i] <= 'Z')
+				argv[1][i] += 32;
+			write(1, &argv[1][i], 1);
+			i++;
+		}
 	}
-	else
-		ft_putchar('\n');
+	write(1, "\n", 1);
 	return (0);
 }
