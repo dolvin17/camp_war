@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/06 18:00:36 by dolvin17          #+#    #+#             */
-/*   Updated: 2023/01/06 19:40:20 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/10 19:27:09 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/10 20:29:59 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,34 @@ $> ./fprime | cat -e
 $
 $> ./fprime 42 21 | cat -e
 $*/
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
-	int	prime;
-	int input;
-
-	prime = 2; //first prime
-	input = atoi(argv[1]);
+	int	i;
+	int	n;
+	
+	i = 2;
 	if (argc == 2)
 	{
-		if (input == 1)
+		n = atoi(argv[1]);
+		if (n == 1)
 			printf("1");
-			while (prime <= input)
+			while (i <= n)
+		{
+			if (n % i == 0)
 			{
-				if (input % prime == 0)
-				{
-					printf("%d", prime);
-					if (input == prime)
-						break;
-					printf("*");
-					input = input / prime;
-					prime = 2;
-				}
-				prime++;
+				printf("%d", i);
+				if (n == i)
+					break;
+				printf("*");
+				n = n / i;
+				i = 2;
 			}
+			i++;
+		}
 	}
 	printf("\n");
 	return (0);
 }
-
-
-
