@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 00:15:28 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/09/18 10:28:37 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/12 14:54:44 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/12 15:30:24 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,29 @@ $>./paramsum 6 12 24 | cat -e
 $>./paramsum | cat -e
 0$
 $>*/
-
-#include <stdio.h>
 #include <unistd.h>
-
-void	ft_putchar(char c)
+void	ft_write(int argc)
 {
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int x)
-{
-	if (x > 9)
+	if (argc > 9)
 	{
-		ft_putnbr(x / 10);
-		ft_putnbr(x % 10);
+		write(1, &"0123456789"[argc / 10], 1);
+		write(1, &"0123456789"[argc % 10], 1);
 	}
 	else
-		ft_putchar(x + '0');
+		write(1, &"0123456789"[argc], 1);
 }
 
 int	main(int argc, char **argv)
 {
-	int	x;
-
-	argv[1] = "0";
-	x = argc - 1;
-	if (x >= 0)
-		ft_putnbr(x);
-	ft_putchar('\n');
+	if (argc > 1)
+	{
+		while (argv[argc])
+			argc++;
+		argc = argc -1;
+		ft_write(argc);
+		write(1, "\n", 1);
+	}
+	else
+		write(1, "0\n", 2);
 	return (0);
 }
