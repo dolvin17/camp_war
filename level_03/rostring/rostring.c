@@ -5,12 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 21:37:24 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/10/06 22:50:11 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/13 19:00:22 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/13 19:41:31 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 /*Assignment name  : rostring
 Expected files   : rostring.c
 Allowed functions: write, malloc, free
@@ -37,34 +36,32 @@ $
 $>*/
 #include <unistd.h>
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int		i;
-	int		j;
-	int		k;
-
-	if (argc == 1)
+	int	start;
+	int	i;
+	
+	if (argc > 1)
 	{
 		i = 0;
-		j = 0;
-		while (argv[1][i] == ' ' || argv[1][i] == '\t')
+		while (argv[1][i] == ' ')
 			i++;
-		k = i;
-		while (argv[1][i] && argv[1][i] != ' ' && argv[1][i] != '\t')
+		start = i;
+		while (argv[1][i] && argv[1][i] != ' ')
 			i++;
 		while (argv[1][i])
 		{
-			if (argv[1][i] && (argv[1][i] != ' ' && argv[1][i] != '\t') \
-				&& (argv[1][i - 1] == ' ' || argv[1][i - 1] == '\t'))
+			if (argv[1][i] && argv[1][i] != ' ' && argv[1][i - 1] == ' ')
 			{
-				while (argv[1][i] && (argv[1][i] != ' ' && argv[1][i] != '\t'))
+				while (argv[1][i] && argv[1][i] != ' ' )
 					write(1, &argv[1][i++], 1);
 				write(1, " ", 1);
 			}
 			i++;
 		}
-		while (argv[1][k] && (argv[1][k] != ' ' && argv[1][k] != '\t'))
-			write(1, &argv[1][k++], 1);
+		/* Printing the first word. */
+		while (argv[1][start] && argv[1][start] != ' ')
+			write(1, &argv[1][start++], 1);
 	}
 	write(1, "\n", 1);
 	return (0);
