@@ -5,74 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 15:43:39 by dolvin17          #+#    #+#             */
-/*   Updated: 2023/01/11 16:33:22 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/13 18:10:45 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/13 18:52:58 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*Assignment name  : add_prime_sum
+Expected files   : add_prime_sum.c
+Allowed functions: write, exit
+--------------------------------------------------------------------------------
+Write a program that takes a positive integer as argument and displays the sum
+of all prime numbers inferior or equal to it followed by a newline.
+If the number of arguments is not 1, or the argument is not a positive number,
+just display 0 followed by a newline.
+Yes, the examples are right.
+Examples:
+$>./add_prime_sum 5
+10
+$>./add_prime_sum 7 | cat -e
+17$
+$>./add_prime_sum | cat -e
+0$
+$>*/
 #include <unistd.h>
-#include <stdio.h>
-
-int	ft_atoi(char *str)
+int	ft_atoi(char *input)
 {
-	int	i;
-	int n;
-
-	i = 0;
-	while (str[i] >= '0' && str[i] <= '9')
+	int	len;
+	int	nbr;
+	
+	len = 0;
+	while (input[len] >= '0' && input[len] <= '9')
 	{
-		n = n * 10 + (str[i] - '0');
-		++i;
+		nbr = nbr * 10 + (input[len] - '0');
+		len++;
 	}
-	return (n);
+	return (nbr);
 }
-
-void ft_putnbr(int n)
+void	ft_putnbr(int	input)
 {
 	char c;
-
-	if (n < 10)
+	
+	if (input < 10)
 	{
-		c = n + '0';
+		c = input + '0';
 		write(1, &c, 1);
 	}
 	else
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		ft_putnbr(input / 10);
+		ft_putnbr(input % 10);
 	}
 }
 
-int	is_prime(int nb)
+int	is_prime(int	input)
 {
-	int	i;
+	int	prime;
 
-	i = 2;
-	if (nb <= 1)
+	prime = 2;
+	if (input <= 1)
 		return (0);
-	while (i < nb)
+	while (prime < input)
 	{
-		/* Checking if the number is a prime number. */
-		if (nb % i == 0)
+		if (input % prime == 0)
 			return (0);
-		i++;
+		prime++;
 	}
 	return (1);
+
 }
 
 int	main(int argc, char **argv)
 {
+	int	input;
 	int	sum;
-	int	n;
 	
 	if (argc == 2)
 	{
-		n = ft_atoi(argv[1]);
+		input = ft_atoi(argv[1]);
 		sum = 0;
-		while (n > 0)
+		while (input > 0)
 		{
-			if (is_prime(n--))
-				sum += (n + 1);
+			if (is_prime(input--))
+				sum = sum + (input + 1);
 		}
 		ft_putnbr(sum);
 		write(1, "\n", 1);
