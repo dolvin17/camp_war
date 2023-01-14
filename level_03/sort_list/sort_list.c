@@ -5,45 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 07:46:56 by dolvin17          #+#    #+#             */
-/*   Updated: 2023/01/09 08:08:26 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/14 15:55:34 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/14 16:47:41 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <stdio.h>
-
-/* this function takes two arguments:
-a pointer to a list
-a pointer to a function cmp. */
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	int	swap;
-	t_list	*temp;
+	t_list *new_lst;
+	int swap;
 	
-	temp = lst;
-	/* Checking if the next node is NULL. */
-	while (lst->next != NULL)
+	new_lst = lst;
+	while (lst->next != NULL) 
 	{
-		/* Calling the function cmp
-		and passing the data of the current node
-		and the next node. */
-		if (((*cmp)(lst->data, lst->next->data)) == 0)
+		//llamo a cmp y le paso el contenido del nodo a comparar.
+		if ((*cmp)(lst->data, lst->next->data) == 0)
 		{
-			/* Storing the data of the current node in a variable called swap. */
-			swap = lst->data;
-			/* Swapping the data of the current node with the data of the next node. */
-			lst->data = lst->next->data;
-			/* Swapping the data of the current node with the data of the next node. */
-			lst->next->data = swap;
-			/* Setting the pointer `lst` back to the beginning of the list. */
-			lst = temp;
+			swap = lst->data;//guardo el contenido del primer nodo en swap.
+			lst->data = lst->next->data;//intercambio el contenido del nodo actual, por el contenido del siguiente nodo
+			lst->next->data = swap;//intercambio el contenido del siguiente nodo, por el contenido del nodo actual.
+			lst = new_lst;//restauro *lst al principio de la lista.
 		}
 		else
-			/* Moving the pointer to the next node. */
 			lst = lst->next;
 	}
-	/* Setting the pointer `lst` back to the beginning of the list. */
-	lst = temp;
+	lst = new_lst;
 	return (lst);
 }
+/*
+t_list	*add_int(t_list *list, int nb)//crear una lista con un nodo de int
+{
+	t_list *new;
+
+	new = (t_list*)malloc(sizeof(t_list));
+	new->data = nb;//meto los int en el nodo
+	new->next = list;//creo un nuevo nodo y lo añado a la lista
+	return (new);
+}
+
+int		ascending(int a, int b)//compara si a <= b
+{
+		return (a <= b);
+}
+
+int	main(void)
+{
+	t_list *list;
+
+	list = NULL;
+	list = add_int(list, 9);
+	list = add_int(list, 3);
+	list = add_int(list, 2);
+	list = add_int(list, 4);
+	list = add_int(list, 1);
+	list = sort_list(list, &ascending);
+
+	while(list != NULL)//mientras haya algo en la lista.
+	{
+		printf("%d\n", list->data);//imprimo el contenido del nodo
+		list = list->next;//apunto al siguiente.
+	}
+	
+	return (0);
+}*/
