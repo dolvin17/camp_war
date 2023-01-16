@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dolvin17 <grks_17@hotmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 11:25:48 by dolvin17          #+#    #+#             */
-/*   Updated: 2022/09/18 11:35:01 by dolvin17         ###   ########.fr       */
+/*   Created: 2023/01/16 16:40:10 by dolvin17          #+#    #+#             */
+/*   Updated: 2023/01/16 16:49:53 by dolvin17         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,36 @@ $>./inter "rien" "cette phrase ne cache rien" | cat -e
 rien$
 $>./inter | cat -e
 $*/
-
 #include <unistd.h>
 
-int	iter(char *str, char c, int len)
+int main(int argc, char **argv)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && (i < len || len == -1))
-		if (str[i++] == c)
-			return (1);
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	int	i;
-
-	if (argc == 3)
+	int i = 0;
+	int j = 0;
+/* Creating an array of 256 integers and setting them all to 0. */
+	int tab[256] = {0};
+	if(argc == 3)
 	{
-		i = 0;
-		while (argv[1][i])
+		while(argv[1][i])
 		{
-			if (!iter(argv[1], argv[1][i], i) && iter(argv[2], argv[1][i], -1))
-				write(1, &argv[1][i], 1);
+			j = 0;
+			while(argv[2][j]) // checks to see repeating characters
+			{
+				if(argv[2][j] == argv[1][i]) // if there is a repeating character, execute the next lines 
+				{
+					/* Checking to see if the character is already in the array. */
+					if(tab[(int)argv[1][i]] == 0)
+					{
+						/* Setting the value of the character to 1. */
+						tab[(int)argv[1][i]] = 1;
+						write(1, &argv[2][j], 1);
+					}
+				}
+				j++;
+			}
 			i++;
 		}
 	}
-	write(1, "\n", 1);
+	write(1,"\n",1);
 	return (0);
 }
