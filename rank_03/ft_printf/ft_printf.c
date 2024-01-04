@@ -1,3 +1,4 @@
+
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -11,7 +12,7 @@ void	ft_putstr(char *str, int *len)
 		*len += write(1, str++, 1);
 }
 
-void	putnbr(long long int nbr, int base, int *len)
+void	ft_putnbr(long long int nbr, int *len, int base)
 {
 	char	*hex;
 
@@ -21,43 +22,43 @@ void	putnbr(long long int nbr, int base, int *len)
 		*len += write(1, "-2147483648", 11);
 		return ;
 	}
-	else if (nbr < 0)
+	if (nbr < 0)
 	{
 		nbr *= -1;
 		*len += write(1, "-", 1);
 	}
 	if (nbr >= base)
-		putnbr((nbr / base), base, len);
+		ft_putnbr((nbr / base), len, base);
 	*len += write(1, &hex[nbr % base], 1);
 }
 
-
-int	ft_printf(const char *format, ...)
+int	ft_printf(char *format, ...)
 {
 	va_list	args;
-	int		counter;
+	int		len;
 
-	counter = 0;
 	va_start(args, format);
+	len = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
 			if (*format == 's')
-				ft_putstr(va_arg(args, char *), &counter);
+				ft_putstr(va_arg(args, char *), &len);
 			else if (*format == 'd')
-				putnbr((long long int)va_arg(args, int), 10, &counter);
+				ft_putnbr((long long int)va_arg(args, int), &len, 10);
 			else if (*format == 'x')
-				putnbr((long long int)va_arg(args, unsigned), 16, &counter);
+				ft_putnbr((long long int)va_arg(args, unsigned), &len, 16);
 		}
 		else
-			counter += write(1, format, 1);
+			len += write(1, format, 1);
 		format++;
 	}
 	va_end(args);
-	return (counter);
+	return (len);
 }
+
 /*
 int	main(void)
 {
@@ -86,4 +87,3 @@ int	main(void)
 	printf("Magic %d is %s\n", nbr, str);
 	ft_printf("Magic %d is %s\n", nbr, str);
 }*/
-
